@@ -135,9 +135,11 @@ class Edd_VC_Integration {
      */
     public function vcMap() {
         // https://wpbakery.atlassian.net/wiki/pages/viewpage.action?pageId=524332
+        // http://docs.easydigitaldownloads.com/article/224-downloads
         vc_map( array(
             'name' => __( 'Downloads', 'easy-digital-downloads' ),
             'base' => 'downloads',
+            'description' => 'Output a list or grid of downloadable products.',
             'icon' => 'dashicons dashicons-download',
             'category' => 'EDD',
             'params' => array(
@@ -157,7 +159,40 @@ class Edd_VC_Integration {
                 self::orderParam(),
                 self::idsParam(),
             ),
-        ));
+        ) );
+
+        // http://docs.easydigitaldownloads.com/article/220-downloadhistory
+        vc_map( array(
+            'name' => __( 'Download History', 'easy-digital-downloads' ),
+            'base' => 'download_history',
+            'description' => 'The user’s download history with product names and all associated download links.',
+            'category' => 'EDD',
+        ) );
+
+        // http://docs.easydigitaldownloads.com/article/228-purchasehistory
+        vc_map( array(
+            'name' => __( 'Purchase History', 'easy-digital-downloads' ),
+            'base' => 'purchse_history',
+            'description' => 'The user’s purchase history with date, amount of each purchase, email and download links.',
+            'category' => 'EDD',
+        ) );
+
+        // http://docs.easydigitaldownloads.com/article/227-downloadcheckout
+        vc_map( array(
+            'name' => __( 'Checkout', 'easy-digital-downloads' ),
+            'base' => 'download_checkout',
+            'description' => 'Display the checkout form.',
+            'category' => 'EDD',
+        ) );
+
+        // http://docs.easydigitaldownloads.com/article/226-downloadcart-shortcode
+        vc_map( array(
+            'name' => __( 'Cart', 'easy-digital-downloads' ),
+            'base' => 'download_cart',
+            'description' => 'Display the cart.',
+            'category' => 'EDD',
+        ) );
+
     }
 
     /**

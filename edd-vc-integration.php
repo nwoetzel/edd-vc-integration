@@ -146,10 +146,16 @@ class Edd_VC_Integration {
                 self::excludeCategoryParam(),
                 self::excludeTagParam(),
                 self::relationParam(),
+                self::numberParam(),
+                self::priceParam(),
                 self::fullContentParam(),
                 self::excerptParam(),
                 self::buyButtonParam(),
                 self::columnsParam(),
+                self::thumbnailsParam(),
+                self::orderbyParam(),
+                self::orderParam(),
+                self::idsParam(),
             ),
         ));
     }
@@ -165,6 +171,7 @@ class Edd_VC_Integration {
         return array(
             'param_name' => 'category',
             'heading' => __( 'Categories', 'js_composer' ),
+            'description' => 'Show downloads of particular download categories.',
             'type' => 'autocomplete',
             'settings' => array(
                 'multiple' => 'true',
@@ -175,7 +182,6 @@ class Edd_VC_Integration {
                 'display_inline' => true,
                 'values' => self::downloadCategoryNames(),
             ),
-            'description' => 'Show downloads of particular download categories.',
             'admin_label' => true,
             'group' => 'Data',
         );
@@ -192,6 +198,7 @@ class Edd_VC_Integration {
         return array(
             'param_name' => 'tag',
             'heading' => __( 'Tags', 'js_composer' ),
+            'description' => 'Show downloads of particular download tags.',
             'type' => 'autocomplete',
             'settings' => array(
                 'multiple' => 'true',
@@ -202,7 +209,6 @@ class Edd_VC_Integration {
                 'display_inline' => true,
                 'values' => self::downloadTagNames(),
             ),
-            'description' => 'Show downloads of particular download tags.',
             'admin_label' => true,
             'group' => 'Data',
         );
@@ -242,6 +248,13 @@ class Edd_VC_Integration {
         return $param;
     }
 
+    /**
+     * This is a shortcode parameter allowing to define the relation between the category and tag selections.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
     protected static function relationParam() {
         return array(
             'param_name' => 'relation',
@@ -251,6 +264,43 @@ class Edd_VC_Integration {
             'type' => 'dropdown',
             'admin_label' => true,
             'group' => 'Data',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to specify the number of downloads to display.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function numberParam() {
+        return array(
+            'param_name' => 'number',
+            'heading' => 'Number of downloads',
+            'description' => 'Specify the maximum number of downloads you want to output.',
+            'type' => 'textfield',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter selecting if the price should be displayed.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function priceParam() {
+        return array(
+            'param_name' => 'price',
+            'heading' => 'Show price',
+            'description' => 'Display the price of the downloads.',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+            'type' => 'checkbox',
+            'admin_label' => true,
+            'group' => 'Layout',
         );
     }
 
@@ -332,6 +382,90 @@ class Edd_VC_Integration {
     }
 
     /**
+     * This is a shortcode parameter to enable the display of download thumbnails.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function thumbnailsParam() {
+        return array(
+            'param_name' => 'thumbnails',
+            'heading' => 'Show Thumbnails',
+            'description' => 'Display thumbnails of the downloads.',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'true' ),
+            'type' => 'checkbox',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to select the download attribute to order by.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function orderbyParam() {
+        return array(
+            'param_name' => 'orderby',
+            'heading' => 'Order by download attribute',
+            'description' => 'Order the downloads by the selected attribute.',
+            'value' => array('id','price','post_date','random','title'),
+            'type' => 'dropdown',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to define the direction of the orderby param.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function orderParam() {
+        return array(
+            'param_name' => 'order',
+            'heading' => 'Order direction for the selected download attribute',
+            'description' => 'Order the downloads by the selected attribute in that direction.',
+            'value' => array('ASC','DESC'),
+            'type' => 'dropdown',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to define a list of downloads by their ids.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function idsParam() {
+        return array(
+            'param_name' => 'ids',
+            'heading' => 'Specific downloads',
+            'description' => 'You can specify multiple downloads.',
+            'type' => 'autocomplete',
+            'settings' => array(
+                'multiple' => 'true',
+                'sortable' => true,
+                'min_length' => 1,
+                'no_hide' => true,
+                'unique_values' => true,
+                'display_inline' => true,
+                'values' => self::downloads(),
+            ),
+            'admin_label' => true,
+            'group' => 'Data',
+        );
+    }
+
+    /**
      * This collects all download_category names.
      * Helper for the categoryParam().
      *
@@ -373,6 +507,23 @@ class Edd_VC_Integration {
         }
 
         return $values;
+    }
+
+    protected static function downloads() {
+        $posts_array = get_posts(array(
+            'post_type' => 'download',
+            'numberposts' => -1,
+            'orderby' => 'post_title',
+            'order' => 'ASC',
+            'fields' => array('ID','post_title')
+        ));
+
+        $downloads = array();
+        foreach($posts_array as $post) {
+            $downloads[] = array( 'label' => $post->post_title, 'value' => $post->ID);            
+        }
+
+        return $downloads;
     }
 
 }

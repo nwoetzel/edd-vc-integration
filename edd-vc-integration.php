@@ -2,7 +2,7 @@
 // based on https://github.com/easydigitaldownloads/EDD-Extension-Boilerplate
 /**
  * Plugin Name: Easy Digital Downloads Visual Composer Integration
- * Plugin URI:  @todo
+ * Plugin URI:  https://github.com/nwoetzel/edd-vc-integration
  * Description: This plugin maps easy-digital-download shortcodes to WPBakery Visual Composer elements.
  * Version:     1.0.0
  * Author:      Nils Woetzel
@@ -143,6 +143,9 @@ class Edd_VC_Integration {
             'params' => array(
                 self::categoryParam(),
                 self::tagParam(),
+                self::excludeCategoryParam(),
+                self::excludeTagParam(),
+                self::relationParam(),
                 self::fullContentParam(),
                 self::excerptParam(),
                 self::buyButtonParam(),
@@ -172,8 +175,7 @@ class Edd_VC_Integration {
                 'display_inline' => true,
                 'values' => self::downloadCategoryNames(),
             ),
-            'save_always' => true,
-            'description' => 'Show downloads of a particular download-category.',
+            'description' => 'Show downloads of particular download categories.',
             'admin_label' => true,
             'group' => 'Data',
         );
@@ -200,8 +202,53 @@ class Edd_VC_Integration {
                 'display_inline' => true,
                 'values' => self::downloadTagNames(),
             ),
-            'save_always' => true,
-            'description' => 'Show downloads of a particular download-category.',
+            'description' => 'Show downloads of particular download tags.',
+            'admin_label' => true,
+            'group' => 'Data',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter allowing to exclude multiple download categories.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function excludeCategoryParam() {
+        // simply modify the categoryParam
+        $param = self::categoryParam();
+        $param['param_name'] = 'exclude_category';
+        $param['heading'] = 'Exclude Categories';
+        $param['description'] = 'Exclude downloads of particular download categories';
+
+        return $param;
+    }
+
+    /**
+     * This is a shortcode parameter allowing to exclude multiple download tags.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function excludeTagParam() {
+        // simply modify the tagParam
+        $param = self::tagParam();
+        $param['param_name'] = 'exclude_tag';
+        $param['heading'] = 'Exclude Tags';
+        $param['description'] = 'Exclude downloads of particular download tags';
+
+        return $param;
+    }
+
+    protected static function relationParam() {
+        return array(
+            'param_name' => 'relation',
+            'heading' => 'Category and Tag relation',
+            'description' => 'Specify whether the downloads displayed have to be in ALL the categories/tags provided ("AND"), or just in at least one ("OR").',
+            'value' => array('OR' => 'OR','AND' => 'AND',),
+            'type' => 'dropdown',
             'admin_label' => true,
             'group' => 'Data',
         );

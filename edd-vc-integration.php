@@ -40,7 +40,7 @@ class Edd_VC_Integration {
             self::$instance = new EDD_VC_Integration();
             self::$instance->setup_constants();
             self::$instance->includes();
-            //self::$instance->load_textdomain();
+//            self::$instance->load_textdomain();
             self::$instance->hooks();
         }
         return self::$instance;
@@ -71,16 +71,16 @@ class Edd_VC_Integration {
      */
     private function includes() {
         // Include scripts
-        //require_once EDD_PLUGIN_NAME_DIR . 'includes/scripts.php';
-        //require_once EDD_PLUGIN_NAME_DIR . 'includes/functions.php';
+//        require_once EDD_PLUGIN_NAME_DIR . 'includes/scripts.php';
+//        require_once EDD_PLUGIN_NAME_DIR . 'includes/functions.php';
         /**
          * @todo        The following files are not included in the boilerplate, but
          *              the referenced locations are listed for the purpose of ensuring
          *              path standardization in EDD extensions. Uncomment any that are
          *              relevant to your extension, and remove the rest.
          */
-        //require_once EDD_PLUGIN_NAME_DIR . 'includes/shortcodes.php';
-        //require_once EDD_PLUGIN_NAME_DIR . 'includes/widgets.php';
+//        require_once EDD_PLUGIN_NAME_DIR . 'includes/shortcodes.php';
+//        require_once EDD_PLUGIN_NAME_DIR . 'includes/widgets.php';
     }
 
     /**
@@ -93,7 +93,7 @@ class Edd_VC_Integration {
      */
     private function hooks() {
         // Register settings
-        //add_filter( 'edd_settings_extensions', array( $this, 'settings' ), 1 );
+//        add_filter( 'edd_settings_extensions', array( $this, 'settings' ), 1 );
 
         // map shortcodes
         if( function_exists( 'vc_map' ) ) { 
@@ -101,9 +101,9 @@ class Edd_VC_Integration {
         }
 
         // Handle licensing
-        if( class_exists( 'EDD_License' ) ) {
-            $license = new EDD_License( __FILE__, 'VC Integration', EDD_VC_INTEGRATION_VER, 'Nils Woetzel' );
-        }
+//        if( class_exists( 'EDD_License' ) ) {
+//            $license = new EDD_License( __FILE__, 'VC Integration', EDD_VC_INTEGRATION_VER, 'Nils Woetzel' );
+//        }
     }
 
     /**
@@ -126,91 +126,173 @@ class Edd_VC_Integration {
         return array_merge( $settings, $new_settings );
     }
 
+    /**
+     * map shortcodes to visual composer elements
+     *
+     * @access      public since it is registered as an action
+     * @since       1.0.0
+     * @return      void
+     */
     public function vcMap() {
+        // https://wpbakery.atlassian.net/wiki/pages/viewpage.action?pageId=524332
         vc_map( array(
             'name' => __( 'Downloads', 'easy-digital-downloads' ),
             'base' => 'downloads',
             'icon' => 'dashicons dashicons-download',
-            'category' => 'HITS',
+            'category' => 'EDD',
             'params' => array(
-                array(
-                    'param_name' => 'category',
-                    'heading' => __( 'Categories', 'js_composer' ),
-                    'type' => 'autocomplete',
-                    'settings' => array(
-                        'multiple' => 'true',
-                        'sortable' => true,
-                        'min_length' => 1,
-                        'no_hide' => true,
-                        'unique_values' => true,
-                        'display_inline' => true,
-                        'values' => $this->getDownloadCategories(),
-                    ),
-                    'save_always' => true,
-                    'description' => 'Show downloads of a particular download-category.',
-                    'admin_label' => true,
-                    'group' => 'Data',
-                ),
-                array(
-                    'param_name' => 'tag',
-                    'heading' => __( 'Tags', 'js_composer' ),
-                    'type' => 'autocomplete',
-                    'settings' => array(
-                        'multiple' => 'true',
-                        'sortable' => true,
-                        'min_length' => 1,
-                        'no_hide' => true,
-                        'unique_values' => true,
-                        'display_inline' => true,
-                        'values' => $this->getDownloadTags(),
-                    ),
-                    'save_always' => true,
-                    'description' => 'Show downloads of a particular download-category.',
-                    'admin_label' => true,
-                    'group' => 'Data',
-                ),
-                array(
-                    'param_name' => 'full_content',
-                    'heading' => 'Full content',
-                    'description' => 'Display the full content of the download or just the excerpt.',
-                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
-                    'type' => 'checkbox',
-                    'admin_label' => true,
-                    'group' => 'Layout',
-                ),
-                array(
-                    'param_name' => 'excerpt',
-                    'heading' => 'Excerpt',
-                    'description' => 'Display just the excerpt.',
-                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
-                    'type' => 'checkbox',
-                    'admin_label' => true,
-                    'group' => 'Layout',
-                ),
-                array(
-                    'param_name' => 'buy_button',
-                    'heading' => 'Buy button',
-                    'description' => 'Display the buy button for each download.',
-                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes', __( 'No', 'js_composer' ) => 'no' ),
-                    'save_always' => true,
-                    'type' => 'dropdown',
-                    'admin_label' => true,
-                    'group' => 'Layout',
-                ),
-                array(
-                    'param_name' => 'columns',
-                    'heading' => 'Columns',
-                    'description' => 'Display the downloads in that many columns.',
-                    'value' => array('1' => '1', '2' => '2', '3' => '3', '4' => '4',),
-                    'type' => 'dropdown',
-                    'admin_label' => true,
-                    'group' => 'Layout',
-                ),
+                self::categoryParam(),
+                self::tagParam(),
+                self::fullContentParam(),
+                self::excerptParam(),
+                self::buyButtonParam(),
+                self::columnsParam(),
             ),
         ));
     }
 
-    protected function getDownloadCategories() {
+    /**
+     * This is a shortcode parameter allowing to choose multiple download categories.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function categoryParam() {
+        return array(
+            'param_name' => 'category',
+            'heading' => __( 'Categories', 'js_composer' ),
+            'type' => 'autocomplete',
+            'settings' => array(
+                'multiple' => 'true',
+                'sortable' => true,
+                'min_length' => 1,
+                'no_hide' => true,
+                'unique_values' => true,
+                'display_inline' => true,
+                'values' => self::downloadCategoryNames(),
+            ),
+            'save_always' => true,
+            'description' => 'Show downloads of a particular download-category.',
+            'admin_label' => true,
+            'group' => 'Data',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter allowing to choose multiple download tags.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function tagParam() {
+        return array(
+            'param_name' => 'tag',
+            'heading' => __( 'Tags', 'js_composer' ),
+            'type' => 'autocomplete',
+            'settings' => array(
+                'multiple' => 'true',
+                'sortable' => true,
+                'min_length' => 1,
+                'no_hide' => true,
+                'unique_values' => true,
+                'display_inline' => true,
+                'values' => self::downloadTagNames(),
+            ),
+            'save_always' => true,
+            'description' => 'Show downloads of a particular download-category.',
+            'admin_label' => true,
+            'group' => 'Data',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter allowing to select showing the full download post content instead of just the excerpt.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function fullContentParam() {
+        return array(
+            'param_name' => 'full_content',
+            'heading' => 'Full content',
+            'description' => 'Display the full content of the download or just the excerpt.',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+            'type' => 'checkbox',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter allowing to select showing the excerpt of a download post instead of the full content.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function excerptParam() {
+        return array(
+            'param_name' => 'excerpt',
+            'heading' => 'Excerpt',
+            'description' => 'Display just the excerpt.',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+            'type' => 'checkbox',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter allowing to display/hdie the buy button with the download.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function buyButtonParam() {
+        return array(
+            'param_name' => 'buy_button',
+            'heading' => 'Buy button',
+            'description' => 'Display the buy button for each download.',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'yes', __( 'No', 'js_composer' ) => 'no' ),
+            'save_always' => true,
+            'type' => 'dropdown',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to select the number of columns in which download previews are displayed.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */    
+    protected static function columnsParam() {
+        return array(
+            'param_name' => 'columns',
+            'heading' => 'Columns',
+            'description' => 'Display the downloads in that many columns.',
+            'value' => array('1' => '1', '2' => '2', '3' => '3', '4' => '4',),
+            'type' => 'dropdown',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This collects all download_category names.
+     * Helper for the categoryParam().
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       string[] names of all download_category terms
+     */
+    protected static function downloadCategoryNames() {
         $term_names = get_terms( array(
             'taxonomy' => 'download_category',
             'fields' => 'names',
@@ -224,7 +306,15 @@ class Edd_VC_Integration {
         return $values;
     }
 
-    protected function getDownloadTags() {
+    /**
+     * This collects all download_tag names.
+     * Helper for the tagParam().
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       string[] names of all download_tag terms
+     */
+    protected static function downloadTagNames() {
         $term_names = get_terms( array(
             'taxonomy' => 'download_tag',
             'fields' => 'names',

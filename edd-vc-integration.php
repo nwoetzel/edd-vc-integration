@@ -185,6 +185,28 @@ class Edd_VC_Integration {
             'category' => 'EDD',
         ) );
 
+        // http://docs.easydigitaldownloads.com/article/229-purchaselink
+        $purchase_links_params = array();
+        $purchase_links_params[] = self::idParam();
+        if ( edd_use_skus()) {
+            $purchase_links_params[] = self::skuParam();
+        }
+        $purchase_links_params[] = self::priceParam();
+        $purchase_links_params[] = self::textParam();
+        $purchase_links_params[] = self::styleParam();
+        $purchase_links_params[] = self::colorParam();
+        $purchase_links_params[] = self::classParam();
+//        $purchase_links_params[] = self::priceIdParam();
+        $purchase_links_params[] = self::directParam();
+
+        vc_map( array(
+            'name' => __( 'Purchase Link', 'easy-digital-downloads' ),
+            'base' => 'purchase_link',
+            'description' => 'Display a purchase button for any download.',
+            'category' => 'EDD',
+            'params' => $purchase_links_params,
+        ) );
+
         // http://docs.easydigitaldownloads.com/article/226-downloadcart-shortcode
         vc_map( array(
             'name' => __( 'Cart', 'easy-digital-downloads' ),
@@ -193,6 +215,46 @@ class Edd_VC_Integration {
             'category' => 'EDD',
         ) );
 
+        // http://docs.easydigitaldownloads.com/article/233-eddprofileeditor
+        vc_map( array(
+            'name' => __( 'Profile Editor', 'easy-digital-downloads' ),
+            'base' => 'edd_profile_editor',
+            'description' => 'Profile editor for logged-in customer.',
+            'category' => 'EDD',
+        ) );
+
+        // http://docs.easydigitaldownloads.com/article/222-eddlogin
+        vc_map( array(
+            'name' => __( 'Login', 'easy-digital-downloads' ),
+            'base' => 'edd_login',
+            'description' => 'Login Form.',
+            'category' => 'EDD',
+            'params' => array(
+                self::redirectParam(),
+            ),
+        ) );
+
+        // http://docs.easydigitaldownloads.com/article/889-register-form
+        vc_map( array(
+            'name' => __( 'Register', 'easy-digital-downloads' ),
+            'base' => 'edd_register',
+            'description' => 'Account Registration Form.',
+            'category' => 'EDD',
+            'params' => array(
+                self::redirectParam(),
+            ),
+        ) );
+    }
+
+    protected static function redirectParam() {
+        return array(
+            'param_name' => 'redirect',
+            'heading' => __( 'Redirect', 'easy-digital-downloads' ),
+            'description' => 'Redirect user after successful Login',
+            'type' => 'textfield',
+            'admin_label' => true,
+            'group' => 'Function',
+        );
     }
 
     /**
@@ -332,8 +394,8 @@ class Edd_VC_Integration {
             'param_name' => 'price',
             'heading' => 'Show price',
             'description' => 'Display the price of the downloads.',
-            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
             'type' => 'checkbox',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
             'admin_label' => true,
             'group' => 'Layout',
         );
@@ -351,8 +413,8 @@ class Edd_VC_Integration {
             'param_name' => 'full_content',
             'heading' => 'Full content',
             'description' => 'Display the full content of the download or just the excerpt.',
-            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
             'type' => 'checkbox',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
             'admin_label' => true,
             'group' => 'Layout',
         );
@@ -370,8 +432,8 @@ class Edd_VC_Integration {
             'param_name' => 'excerpt',
             'heading' => 'Excerpt',
             'description' => 'Display just the excerpt.',
-            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
             'type' => 'checkbox',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
             'admin_label' => true,
             'group' => 'Layout',
         );
@@ -428,8 +490,8 @@ class Edd_VC_Integration {
             'param_name' => 'thumbnails',
             'heading' => 'Show Thumbnails',
             'description' => 'Display thumbnails of the downloads.',
-            'value' => array( __( 'Yes', 'js_composer' ) => 'true' ),
             'type' => 'checkbox',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'true' ),
             'admin_label' => true,
             'group' => 'Layout',
         );
@@ -487,7 +549,7 @@ class Edd_VC_Integration {
             'description' => 'You can specify multiple downloads.',
             'type' => 'autocomplete',
             'settings' => array(
-                'multiple' => 'true',
+                'multiple' => true,
                 'sortable' => true,
                 'min_length' => 1,
                 'no_hide' => true,
@@ -499,6 +561,153 @@ class Edd_VC_Integration {
             'group' => 'Data',
         );
     }
+
+    /*
+     * params related to the purchase_link shortcode
+     */
+
+    /**
+     * This is a shortcode parameter to select a download by its id.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function idParam() {
+        return array(
+            'param_name' => 'id',
+            'heading' => 'Download',
+            'description' => 'Select a download.',
+            'type' => 'autocomplete',
+            'settings' => array(
+                'sortable' => true,
+                'min_length' => 1,
+                'display_inline' => true,
+                'values' => self::downloads(),
+            ),
+            'admin_label' => true,
+            'group' => 'Data',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to select a download by its sku.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function skuParam() {
+        return array(
+            'param_name' => 'sku',
+            'heading' => 'Download by SKU',
+            'description' => 'SKU of the download - use this instead of selecting a download.',
+            'type' => 'textfield',
+            'admin_label' => true,
+            'group' => 'Data',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to define the text for a purchase link.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function textParam() {
+        return array(
+            'param_name' => 'text',
+            'heading' => 'Text on Button',
+            'description' => 'Specify the text that is diplayed on the button.',
+            'type' => 'textfield',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+     /**
+     * This is a shortcode parameter to define the style for a purchase link (text or button).
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function styleParam() {
+        return array(
+            'param_name' => 'style',
+            'heading' => 'Style',
+            'description' => 'Select the style of the link.',
+            'type' => 'dropdown',
+            'value' => array('Default' => edd_get_option( 'button_style', 'button' ), 'Button' => 'button', 'Text' => 'text',),
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to define the color for a purchase link.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function colorParam() {
+        return array(
+            'param_name' => 'color',
+            'heading' => 'Color',
+            'description' => 'Select the color of the button.',
+            'type' => 'dropdown',
+            'value' => array('default' => edd_get_option( 'checkout_color', 'blue' ),'Gray' => 'gray','Blue' => 'blue','Green' => 'green','Dark gray' => 'dark gray','Yellow' => 'yellow',),
+            'dependency' => array(
+                'element' => 'style',
+                'value' => 'button',
+            ),
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to define additional classes for a purchase link.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function classParam() {
+        return array(
+            'param_name' => 'class',
+            'heading' => 'Class',
+            'description' => 'Add classes to the link.',
+            'type' => 'textfield',
+            'admin_label' => true,
+            'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to define if the purchse links should lead to the checkout.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function directParam() {
+        return array(
+            'param_name' => 'direct',
+            'heading' => 'Direct checkout',
+            'description' => 'Send the user directly to the checkout.',
+            'type' => 'checkbox',
+            'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+            'admin_label' => true,
+            'group' => 'Function',
+        );
+    }
+
+    /*
+     * other helper functions
+     */
 
     /**
      * This collects all download_category names.

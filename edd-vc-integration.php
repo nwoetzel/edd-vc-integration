@@ -960,7 +960,7 @@ register_activation_hook( __FILE__, 'edd_vc_integration_activation' );
  * A nice function name to retrieve the instance that's created on plugins loaded
  *
  * @since 2.2.3
- * @return object EDD_Simple_Shipping
+ * @return \EDD_VC_Integration
  */
 function edd_vc_integration() {
 	return edd_vc_integration_load();

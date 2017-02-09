@@ -55,7 +55,7 @@ class EDD_VC_Integration {
      */
     private function setup_constants() {
         // Plugin version
-        define( 'EDD_VC_INTERGATION_VER', '1.0.0' );
+        define( 'EDD_VC_INTERGATION_VER', '1.0.2' );
         // Plugin path
         define( 'EDD_VC_INTERGATION_DIR', plugin_dir_path( __FILE__ ) );
         // Plugin URL

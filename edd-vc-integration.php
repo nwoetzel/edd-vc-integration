@@ -23,7 +23,7 @@ if( !class_exists( 'EDD_VC_Integration' ) ) {
 class EDD_VC_Integration {
 
     /**
-     * @var EDD_VC_Integration $instance The one true EDD_Plugin_Name
+     * @var EDD_VC_Integration $instance The one true EDD_VC_Integration
      * @since       1.0.0
      */
     private static $instance;

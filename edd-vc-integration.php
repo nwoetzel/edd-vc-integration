@@ -162,9 +162,53 @@ class Edd_VC_Integration {
             ),
         ) );
 
+        // http://docs.easydigitaldownloads.com/article/1194-purchasecollection-shortcode
+        $purchase_collection_params = array();
+        $purchase_collection_params[] = array(
+            'param_name' => 'taxonomy',
+            'heading' => 'Taxonomy',
+            'description' => 'Category or Tag.',
+            'type' => 'dropdown',
+            'value' => array('Category' => 'download_category', 'Tag' => 'download_tag',),
+            'save_always' => true,
+            'admin_label' => true,
+            'group' => 'Data',
+        );
+        $purchase_collection_category_param = self::categoryParam();
+        $purchase_collection_category_param['dependency'] = array(
+            'element' => 'taxonomy',
+            'value' => 'download_category',
+        );
+        $purchase_collection_params[] = $purchase_collection_category_param;
+        $purchase_collection_tag_param = self::tagParam();
+        $purchase_collection_tag_param['dependency'] = array(
+            'element' => 'taxonomy',
+            'value' => 'download_tag',
+        );
+        $purchase_collection_params[] = $purchase_collection_tag_param;
+        $purchase_collection_params[] = self::textParam();
+        $purchase_collection_params[] = self::styleParam();
+        $purchase_collection_params[] = self::colorParam();
+
+        vc_map( array(
+            'name' => __( 'Purchase Collection', 'easy-digital-downloads' ),
+            'base' => 'purchase_collection',
+            'description' => 'Make a unique category-based collection of products to be sold as a package.',
+            'category' => 'EDD',
+            'params' => $purchase_collection_params,
+        ) );
+
+        // http://docs.easydigitaldownloads.com/article/223-downloaddiscounts
+        vc_map( array(
+            'name' => __( 'Discounts', 'easy-digital-downloads' ),
+            'base' => 'download_discounts',
+            'description' => 'Display a list of all active discounts in an unordered list of discount code and amount.',
+            'category' => 'EDD',
+        ) );
+
         // http://docs.easydigitaldownloads.com/article/220-downloadhistory
         vc_map( array(
-            'name' => __( 'Download History', 'easy-digital-downloads' ),
+            'name' => __( 'History', 'easy-digital-downloads' ),
             'base' => 'download_history',
             'description' => 'The user’s download history with product names and all associated download links.',
             'category' => 'EDD',
@@ -173,7 +217,7 @@ class Edd_VC_Integration {
         // http://docs.easydigitaldownloads.com/article/228-purchasehistory
         vc_map( array(
             'name' => __( 'Purchase History', 'easy-digital-downloads' ),
-            'base' => 'purchse_history',
+            'base' => 'purchase_history',
             'description' => 'The user’s purchase history with date, amount of each purchase, email and download links.',
             'category' => 'EDD',
         ) );
@@ -744,7 +788,7 @@ class Edd_VC_Integration {
             'heading' => 'Color',
             'description' => 'Select the color of the button.',
             'type' => 'dropdown',
-            'value' => array('default' => edd_get_option( 'checkout_color', 'blue' ),'Gray' => 'gray','Blue' => 'blue','Green' => 'green','Dark gray' => 'dark gray','Yellow' => 'yellow',),
+            'value' => array('default' => edd_get_option( 'checkout_color', 'blue' ),'Inherit' => 'inherit', 'Gray' => 'gray', 'Blue' => 'blue', 'Green' => 'green', 'Dark gray' => 'dark gray', 'Yellow' => 'yellow',),
             'dependency' => array(
                 'element' => 'style',
                 'value' => 'button',

@@ -12,24 +12,16 @@ This pluging integrates shortcodes defined by the easy-digital-downloads plugin 
 == Description ==
 
 This plugin requires that you have installed:
-* [Visual Composer](https://vc.wpbakery.com/)
-* [Easy digital downloads](https://wordpress.org/plugins/easy-digital-downloads/)
+* [Visual Composer](https://vc.wpbakery.com/) - tested for version 5.0.1
+* [Easy digital downloads](https://wordpress.org/plugins/easy-digital-downloads/) - tested for version 2.6.17
 
-The [easy digital downloads shortcodes](https://wordpress.org/plugins/easy-digital-downloads/) are mapped as Visual Composer elements.
+The [easy digital downloads shortcodes](https://github.com/nwoetzel/edd-vc-integration/) are mapped as Visual Composer elements.
 
 == Installation ==
 
-The usual way.
+Download the zip file for the most recent stable release and install from it.
 
 == Frequently Asked Questions ==
-
-= I cannot see all shortcodes as elements =
-
-Currently, only the 'download' shortcode is mapped. More will follow.
-
-= I cannot see all options/attributes =
-
-In the current stable version, only the most common attributes are available.
 
 = The elements icons do not look nice =
 
@@ -39,5 +31,8 @@ There might be some improvement in the future. No high priority.
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.1 =
+* Imroved readme.txt
+
+= 1.0.0 =
 * Initial release

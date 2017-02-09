@@ -767,7 +767,7 @@ class Edd_VC_Integration {
         return array(
             'param_name' => 'style',
             'heading' => 'Style',
-            'description' => 'Select the style of the link.',
+            'description' => 'Select the style of the purchase link.',
             'type' => 'dropdown',
             'value' => array('Default' => edd_get_option( 'button_style', 'button' ), 'Button' => 'button', 'Text' => 'text',),
             'admin_label' => true,
@@ -776,7 +776,8 @@ class Edd_VC_Integration {
     }
 
     /**
-     * This is a shortcode parameter to define the color for a purchase link.
+     * This is a shortcode parameter to define the color for a purchase button.
+     * http://docs.easydigitaldownloads.com/article/867-style-settings
      *
      * @access       protected
      * @since        1.0.0

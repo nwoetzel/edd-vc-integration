@@ -246,6 +246,18 @@ class Edd_VC_Integration {
             ),
         ) );
 
+        // http://docs.easydigitaldownloads.com/article/1193-eddprice-shortcode
+        vc_map( array(
+            'name' => __( 'Price', 'easy-digital-downloads' ),
+            'base' => 'edd_price',
+            'description' => 'Shwo price of a download.',
+            'category' => 'EDD',
+            'params' => array(
+                self::idParam(),
+                self::priceIdParam(),
+            ),
+        ) );
+
         // http://docs.easydigitaldownloads.com/article/221-eddreceipt
         vc_map( array(
             'name' => __( 'Receipt', 'easy-digital-downloads' ),
@@ -771,7 +783,7 @@ class Edd_VC_Integration {
         return array(
             'param_name' => 'price_id',
             'heading' => 'Variable Price Id',
-            'description' => 'The varibale price id to create the link for - first one is default.',
+            'description' => 'The varibale price id to use - first one is default.',
             'type' => 'textfield',
             'admin_label' => true,
             'group' => 'Data',

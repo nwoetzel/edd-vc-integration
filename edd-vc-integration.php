@@ -127,7 +127,8 @@ class Edd_VC_Integration {
     }
 
     /**
-     * map shortcodes to visual composer elements
+     * map easy-digital-downloads shortcodes to visual composer elements
+     * http://docs.easydigitaldownloads.com/category/219-short-codes
      *
      * @access      public since it is registered as an action
      * @since       1.0.0
@@ -242,6 +243,79 @@ class Edd_VC_Integration {
             'category' => 'EDD',
             'params' => array(
                 self::redirectParam(),
+            ),
+        ) );
+
+        // http://docs.easydigitaldownloads.com/article/221-eddreceipt
+        vc_map( array(
+            'name' => __( 'Receipt', 'easy-digital-downloads' ),
+            'base' => 'edd_receipt',
+            'description' => 'Detailed breakdown of the purchased items.',
+            'category' => 'EDD',
+            'params' => array(
+                array(
+                    'param_name' => 'error',
+                    'heading' => 'Error message',
+                    'description' => 'Change the default error message, if an error occurs.',
+                    'type' => 'textfield',
+                    'admin_label' => true,
+                    'group' => 'Layout',
+                ),
+                self::PriceParam(),
+                array(
+                    'param_name' => 'discount',
+                    'heading' => 'Discount',
+                    'description' => 'Display the discount codes used.',
+                    'type' => 'checkbox',
+                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+                    'admin_label' => true,
+                    'group' => 'Layout',
+                ),
+                array(
+                    'param_name' => 'products',
+                    'heading' => 'Products',
+                    'description' => 'Display the products purchased.',
+                    'type' => 'checkbox',
+                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+                    'admin_label' => true,
+                    'group' => 'Layout',
+                ),
+                array(
+                    'param_name' => 'date',
+                    'heading' => 'Date',
+                    'description' => 'Display the date of the purchase.',
+                    'type' => 'checkbox',
+                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+                    'admin_label' => true,
+                    'group' => 'Layout',
+                ),
+                array(
+                    'param_name' => 'payment_key',
+                    'heading' => 'Purchase Identifier',
+                    'description' => 'Display the unique identifier for the order.',
+                    'type' => 'checkbox',
+                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+                    'admin_label' => true,
+                    'group' => 'Layout',
+                ),
+                array(
+                    'param_name' => 'payment_method',
+                    'heading' => 'Payment method',
+                    'description' => 'Display the method of payment for the order.',
+                    'type' => 'checkbox',
+                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+                    'admin_label' => true,
+                    'group' => 'Layout',
+                ),
+                array(
+                    'param_name' => 'payment_id',
+                    'heading' => 'Payment Number',
+                    'description' => 'Display the payment number of the order.',
+                    'type' => 'checkbox',
+                    'value' => array( __( 'Yes', 'js_composer' ) => 'yes' ),
+                    'admin_label' => true,
+                    'group' => 'Layout',
+                ),
             ),
         ) );
     }

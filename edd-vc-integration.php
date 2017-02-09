@@ -89,7 +89,6 @@ class EDD_VC_Integration {
      * @access      private
      * @since       1.0.0
      * @return      void
-     *
      */
     private function hooks() {
         // Register settings

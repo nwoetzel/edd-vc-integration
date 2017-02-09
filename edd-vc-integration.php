@@ -196,7 +196,7 @@ class Edd_VC_Integration {
         $purchase_links_params[] = self::styleParam();
         $purchase_links_params[] = self::colorParam();
         $purchase_links_params[] = self::classParam();
-//        $purchase_links_params[] = self::priceIdParam();
+        $purchase_links_params[] = self::priceIdParam();
         $purchase_links_params[] = self::directParam();
 
         vc_map( array(
@@ -683,6 +683,24 @@ class Edd_VC_Integration {
             'type' => 'textfield',
             'admin_label' => true,
             'group' => 'Layout',
+        );
+    }
+
+    /**
+     * This is a shortcode parameter to define the varibale price id for a purchase link.
+     *
+     * @access       protected
+     * @since        1.0.0
+     * @return       array describing a shortcode parameter
+     */
+    protected static function priceIdParam() {
+        return array(
+            'param_name' => 'price_id',
+            'heading' => 'Variable Price Id',
+            'description' => 'The varibale price id to create the link for - first one is default.',
+            'type' => 'textfield',
+            'admin_label' => true,
+            'group' => 'Data',
         );
     }
 

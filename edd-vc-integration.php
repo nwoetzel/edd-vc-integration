@@ -929,7 +929,7 @@ class EDD_VC_Integration {
  * @since       1.0.0
  * @return      \EDD_VC_Integration The one true EDD_VC_Integration
  */
-function EDD_VC_Integration_load() {
+function edd_vc_integration_load() {
     if( ! class_exists( 'Easy_Digital_Downloads' ) ) {
         if( ! class_exists( 'EDD_Extension_Activation' ) ) {
             require_once 'includes/class.extension-activation.php';
@@ -940,7 +940,7 @@ function EDD_VC_Integration_load() {
         return EDD_VC_Integration::instance();
     }
 }
-add_action( 'plugins_loaded', 'EDD_VC_Integration_load' );
+add_action( 'plugins_loaded', 'edd_vc_integration_load' );
 
 /**
  * The activation hook is called outside of the singleton because WordPress doesn't
@@ -959,9 +959,9 @@ register_activation_hook( __FILE__, 'edd_vc_integration_activation' );
 /**
  * A nice function name to retrieve the instance that's created on plugins loaded
  *
- * @since 2.2.3
+ * @since 1.0.0
  * @return \EDD_VC_Integration
  */
 function edd_vc_integration() {
-	return edd_vc_integration_load();
+    return edd_vc_integration_load();
 }

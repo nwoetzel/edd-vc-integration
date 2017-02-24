@@ -4,7 +4,7 @@
  * Plugin Name: Easy Digital Downloads Visual Composer Integration
  * Plugin URI:  https://github.com/nwoetzel/edd-vc-integration
  * Description: This plugin maps easy-digital-download shortcodes to WPBakery Visual Composer elements.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      Nils Woetzel
  * Author URI:  https://github.com/nwoetzel
  * Text Domain: edd-vc-integration
@@ -55,7 +55,7 @@ class EDD_VC_Integration {
      */
     private function setup_constants() {
         // Plugin version
-        define( 'EDD_VC_INTEGRATION_VER', '1.0.3' );
+        define( 'EDD_VC_INTEGRATION_VER', '1.1.0' );
         // Plugin path
         define( 'EDD_VC_INTEGRATION_DIR', plugin_dir_path( __FILE__ ) );
         // Plugin URL
@@ -109,7 +109,7 @@ class EDD_VC_Integration {
      * Internationalization
      *
      * @access      public
-     * @since       1.0.3
+     * @since       1.1.0
      * @return      void
      */
     public function load_textdomain() {

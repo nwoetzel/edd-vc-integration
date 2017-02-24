@@ -3,7 +3,7 @@ Contributors: nwoetzel
 Tags: edd, easy digital downloads, vc, visual composer
 Requires at least: 4.6
 Tested up to: 4.7.2
-Stable tag: 1.0.3
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,9 +31,12 @@ There might be some improvement in the future. No high priority.
 
 == Changelog ==
 
-= 1.0.3 =
+= 1.1.0 =
 * added load_textdomain
 * added translation for de_DE
+
+= 1.0.3 =
+* fixed issue #2 so that unchecked checkboxes are really saved as empty and are treated as false
 
 = 1.0.2 =
 * Improved readme.txt

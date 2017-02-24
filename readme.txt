@@ -31,6 +31,9 @@ There might be some improvement in the future. No high priority.
 
 == Changelog ==
 
+= 1.0.3 =
+* fixed issue #2 so that unchecked checkboxes are really saved as empty and are treated as false
+
 = 1.0.2 =
 * Improved readme.txt
 * corrected EDD_VC_Intergation class name

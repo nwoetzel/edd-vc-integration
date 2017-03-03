@@ -40,7 +40,7 @@ class EDD_VC_Integration {
             self::$instance = new EDD_VC_Integration();
             self::$instance->setup_constants();
             self::$instance->includes();
-//            self::$instance->load_textdomain();
+            self::$instance->load_textdomain();
             self::$instance->hooks();
         }
         return self::$instance;
@@ -55,11 +55,11 @@ class EDD_VC_Integration {
      */
     private function setup_constants() {
         // Plugin version
-        define( 'EDD_VC_INTERGATION_VER', '1.0.2' );
+        define( 'EDD_VC_INTEGRATION_VER', '1.0.2' );
         // Plugin path
-        define( 'EDD_VC_INTERGATION_DIR', plugin_dir_path( __FILE__ ) );
+        define( 'EDD_VC_INTEGRATION_DIR', plugin_dir_path( __FILE__ ) );
         // Plugin URL
-        define( 'EDD_VC_INTERGATION_URL', plugin_dir_url( __FILE__ ) );
+        define( 'EDD_VC_INTEGRATION_URL', plugin_dir_url( __FILE__ ) );
     }
 
     /**
@@ -71,16 +71,16 @@ class EDD_VC_Integration {
      */
     private function includes() {
         // Include scripts
-//        require_once EDD_PLUGIN_NAME_DIR . 'includes/scripts.php';
-//        require_once EDD_PLUGIN_NAME_DIR . 'includes/functions.php';
+//        require_once EDD_VC_INTEGRATION_DIR . 'includes/scripts.php';
+//        require_once EDD_VC_INTEGRATION_DIR . 'includes/functions.php';
         /**
          * @todo        The following files are not included in the boilerplate, but
          *              the referenced locations are listed for the purpose of ensuring
          *              path standardization in EDD extensions. Uncomment any that are
          *              relevant to your extension, and remove the rest.
          */
-//        require_once EDD_PLUGIN_NAME_DIR . 'includes/shortcodes.php';
-//        require_once EDD_PLUGIN_NAME_DIR . 'includes/widgets.php';
+//        require_once EDD_VC_INTEGRATION_DIR . 'includes/shortcodes.php';
+//        require_once EDD_VC_INTEGRATION_DIR . 'includes/widgets.php';
     }
 
     /**
@@ -103,6 +103,35 @@ class EDD_VC_Integration {
 //        if( class_exists( 'EDD_License' ) ) {
 //            $license = new EDD_License( __FILE__, 'VC Integration', EDD_VC_INTEGRATION_VER, 'Nils Woetzel' );
 //        }
+    }
+
+    /**
+     * Internationalization
+     *
+     * @access      public
+     * @since       1.0.0
+     * @return      void
+     */
+    public function load_textdomain() {
+        // Set filter for language directory
+        $lang_dir = EDD_VC_INTEGRATION_DIR . '/languages/';
+        $lang_dir = apply_filters( 'edd_vc_integration_languages_directory', $lang_dir );
+        // Traditional WordPress plugin locale filter
+        $locale = apply_filters( 'plugin_locale', get_locale(), 'edd-vc-integration' );
+        $mofile = sprintf( '%1$s-%2$s.mo', 'edd-vc-integration', $locale );
+        // Setup paths to current locale file
+        $mofile_local   = $lang_dir . $mofile;
+        $mofile_global  = WP_LANG_DIR . '/edd-vc-integration/' . $mofile;
+        if( file_exists( $mofile_global ) ) {
+            // Look in global /wp-content/languages/edd-vc-integration/ folder
+            load_textdomain( 'edd-vc-integration', $mofile_global );
+        } elseif( file_exists( $mofile_local ) ) {
+            // Look in local /wp-content/plugins/edd-vc-integration/languages/ folder
+            load_textdomain( 'edd-vc-integration', $mofile_local );
+        } else {
+            // Load the default language files
+            load_plugin_textdomain( 'edd-vc-integration', false, $lang_dir );
+        }
     }
 
     /**

@@ -130,7 +130,7 @@ class EDD_VC_Integration {
             load_textdomain( 'edd-vc-integration', $mofile_local );
         } else {
             // Load the default language files
-            load_plugin_textdomain( 'edd-vc-integration', false, $lang_dir );
+            load_plugin_textdomain( 'edd-vc-integration', false, 'edd-vc-integration/languages' );
         }
     }
 

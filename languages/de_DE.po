@@ -5,106 +5,469 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EDD VC Integration 1.0.3\n"
 "Report-Msgid-Bugs-To: Nils Woetzel <nils.woetzel@h-its.org>\n"
-"POT-Creation-Date: 2017-03-03 10:48+0000\n"
+"POT-Creation-Date: 2017-03-03 15:03+0000\n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
-"Language: de_DE\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: edd-vc-integration.php:120
+#: edd-vc-integration.php:149
 msgid "VC Integration Settings"
 msgstr "VC Integration Einstellungen"
 
-#: edd-vc-integration.php:121
-msgid "Configure VC Integration Settings"
-msgstr "Konfiguriere VC Integration Einstellungen"
+#: edd-vc-integration.php:150
+msgid "Configure VC Integration"
+msgstr "Konfiguriere die VC Integration"
 
-#: edd-vc-integration.php:140
+#: edd-vc-integration.php:169
 msgid "Downloads"
 msgstr "Downloads"
 
-#: edd-vc-integration.php:193
+#: edd-vc-integration.php:171
+msgid "Output a list or grid of downloadable products."
+msgstr "Generiert ein Raster von herunterladbaren Produkten. "
+
+#: edd-vc-integration.php:197
+msgid "Taxonomy"
+msgstr "Taxonomie"
+
+#: edd-vc-integration.php:200
+msgid "Category"
+msgstr "Kategorie"
+
+#: edd-vc-integration.php:200
+msgid "Tag"
+msgstr "Tag"
+
+#: edd-vc-integration.php:222
 msgid "Purchase Collection"
 msgstr "Kauf Kollektion"
 
-#: edd-vc-integration.php:202
+#: edd-vc-integration.php:224
+msgid ""
+"Make a unique category-based collection of products to be sold as a package."
+msgstr "Generiere eine Kollektion von Produkten die als Paket verkauft werden."
+
+#: edd-vc-integration.php:231
 msgid "Discounts"
 msgstr "Rabatte"
 
-#: edd-vc-integration.php:210
+#: edd-vc-integration.php:233
+msgid ""
+"Display a list of all active discounts in an unordered list of discount code "
+"and amount."
+msgstr ""
+"Zeigt eine Liste von aktiven Rabatten in einer ungeordneten Liste von "
+"Rabattcode und Betrag."
+
+#: edd-vc-integration.php:239
 msgid "History"
 msgstr "Verlauf"
 
-#: edd-vc-integration.php:218
+#: edd-vc-integration.php:241
+msgid ""
+"The user’s download history with product names and all associated download "
+"links."
+msgstr ""
+"Des Nutzers Download Verlauf mit Produktnamen und allen assoziierten "
+"Download Links."
+
+#: edd-vc-integration.php:247
 msgid "Purchase History"
 msgstr "Einkauf Verlauf"
 
-#: edd-vc-integration.php:226
+#: edd-vc-integration.php:249
+msgid ""
+"The user’s purchase history with date, amount of each purchase, email and "
+"download links."
+msgstr ""
+"Des Nutzers Download Verlauf mit Datum, Betrag jedes Einkaufs, email und "
+"assoziierten Download Links."
+
+#: edd-vc-integration.php:255
 msgid "Checkout"
 msgstr "Kasse"
 
-#: edd-vc-integration.php:247
+#: edd-vc-integration.php:257
+msgid "Display the checkout form."
+msgstr "Zeigt das Kassen Formular."
+
+#: edd-vc-integration.php:276
 msgid "Purchase Link"
 msgstr "Kauf Link"
 
-#: edd-vc-integration.php:256
+#: edd-vc-integration.php:278
+msgid "Display a purchase button for any download."
+msgstr "Zeige ein Kauf button for einen beliebigen Download."
+
+#: edd-vc-integration.php:285
 msgid "Cart"
 msgstr "Einkaufswagen"
 
-#: edd-vc-integration.php:264
+#: edd-vc-integration.php:287
+msgid "Display the cart."
+msgstr "Zeige den Einkaufswagen."
+
+#: edd-vc-integration.php:293
 msgid "Profile Editor"
 msgstr "Profil Editor"
 
-#: edd-vc-integration.php:272
+#: edd-vc-integration.php:295
+msgid "Profile editor for logged-in customer."
+msgstr "Profil Editor für eingeloggte Nutzer."
+
+#: edd-vc-integration.php:301
 msgid "Login"
 msgstr "Login"
 
-#: edd-vc-integration.php:283
+#: edd-vc-integration.php:303
+msgid "Login Form."
+msgstr "Login Formular."
+
+#: edd-vc-integration.php:312
 msgid "Register"
 msgstr "Registrierung"
 
-#: edd-vc-integration.php:294
+#: edd-vc-integration.php:314
+msgid "Account Registration Form."
+msgstr "Konto Registrierungs Formular."
+
+#: edd-vc-integration.php:323
 msgid "Price"
 msgstr "Preis"
 
-#: edd-vc-integration.php:306
+#: edd-vc-integration.php:325
+msgid "Show price of a download."
+msgstr "Zeigt den Preis eines Downloads."
+
+#: edd-vc-integration.php:335
 msgid "Receipt"
 msgstr "Beleg"
 
-#: edd-vc-integration.php:325 edd-vc-integration.php:335
-#: edd-vc-integration.php:345 edd-vc-integration.php:355
-#: edd-vc-integration.php:365 edd-vc-integration.php:375
-#: edd-vc-integration.php:533 edd-vc-integration.php:553
-#: edd-vc-integration.php:573 edd-vc-integration.php:592
-#: edd-vc-integration.php:632 edd-vc-integration.php:860
+#: edd-vc-integration.php:337
+msgid "Detailed breakdown of the purchased items."
+msgstr "Detaillierte Aufschlüsselung aller gekauften Dinge."
+
+#: edd-vc-integration.php:342
+msgid "Error message"
+msgstr "Fehlermeldung"
+
+#: edd-vc-integration.php:343
+msgid "Change the default error message, if an error occurs."
+msgstr "Ändere die vorgegebene Fehlermedlung, when ein Fehler auftritt."
+
+#: edd-vc-integration.php:351
+msgid "Discount"
+msgstr "Rabatt"
+
+#: edd-vc-integration.php:352
+msgid "Display the discount codes used."
+msgstr "Zeige die genutzen Rabattcodes."
+
+#: edd-vc-integration.php:354 edd-vc-integration.php:364
+#: edd-vc-integration.php:374 edd-vc-integration.php:384
+#: edd-vc-integration.php:394 edd-vc-integration.php:404
+#: edd-vc-integration.php:569 edd-vc-integration.php:589
+#: edd-vc-integration.php:609 edd-vc-integration.php:628
+#: edd-vc-integration.php:668 edd-vc-integration.php:904
 msgid "Yes"
 msgstr "Ja"
 
-#: edd-vc-integration.php:387
+#: edd-vc-integration.php:361
+msgid "Products"
+msgstr "Produkte"
+
+#: edd-vc-integration.php:362
+msgid "Display the products purchased."
+msgstr "Zeige die erworbenen Produkte."
+
+#: edd-vc-integration.php:371
+msgid "Date"
+msgstr "Datum"
+
+#: edd-vc-integration.php:372
+msgid "Display the date of the purchase."
+msgstr "Zeigt das Datum des Einkaufs."
+
+#: edd-vc-integration.php:381
+msgid "Purchase Identifier"
+msgstr "Kauf Bezeichnung"
+
+#: edd-vc-integration.php:382
+msgid "Display the unique identifier for the order."
+msgstr "Zeigt die eindeutige Bezeichnung des Einkaufs."
+
+#: edd-vc-integration.php:391
+msgid "Payment method"
+msgstr "Bezahlmethode"
+
+#: edd-vc-integration.php:392
+msgid "Display the method of payment for the order."
+msgstr "Zeigt die Bezahlmethode des Einkaufs."
+
+#: edd-vc-integration.php:401
+msgid "Payment Number"
+msgstr "Bezahlnummer"
+
+#: edd-vc-integration.php:402
+msgid "Display the payment number of the order."
+msgstr "Zeigt die Bezahlnummer des Einkaufs."
+
+#: edd-vc-integration.php:423
 msgid "Redirect"
 msgstr "Umleitung"
 
-#: edd-vc-integration.php:405
+#: edd-vc-integration.php:424
+msgid "Redirect user after successful login."
+msgstr "Leite den Nutzer nach erfolgreichem login um."
+
+#: edd-vc-integration.php:441
 msgid "Categories"
 msgstr "Kategorien"
 
-#: edd-vc-integration.php:432
+#: edd-vc-integration.php:442
+msgid "Show downloads of particular download categories."
+msgstr "Zeige Downloads von bestimmten Downloadkategorien an."
+
+#: edd-vc-integration.php:468
 msgid "Tags"
 msgstr "Schlagwörter"
 
-#: edd-vc-integration.php:592
+#: edd-vc-integration.php:469
+msgid "Show downloads of particular download tags."
+msgstr "Zeige Downloads von bestimmten Downloadtags an."
+
+#: edd-vc-integration.php:496
+msgid "Exclude Categories"
+msgstr "Kategorien ausschließen"
+
+#: edd-vc-integration.php:497
+msgid "Exclude downloads of particular download categories."
+msgstr "Schließe Downloads bestimmer Downloadkategorien aus."
+
+#: edd-vc-integration.php:513
+msgid "Exclude Tags"
+msgstr "Tags ausschließen"
+
+#: edd-vc-integration.php:514
+msgid "Exclude downloads of particular download tags."
+msgstr "Schließe Downloads bestimmer Downloadtags aus."
+
+#: edd-vc-integration.php:529
+msgid "Category and Tag relation"
+msgstr "Kategorie und Tag Relation"
+
+#: edd-vc-integration.php:530
+msgid ""
+"Specify whether the downloads displayed have to be in ALL the categories/"
+"tags provided (\"AND\"), or just in at least one (\"OR\")."
+msgstr ""
+"Spezifiziere ob die angezeigten Downloads in ALLEN Kategorien/Tags sein "
+"müssen (\"UND\"), oder in mindestens einer (\"ODER\")."
+
+#: edd-vc-integration.php:531
+msgid "OR"
+msgstr "ODER"
+
+#: edd-vc-integration.php:531
+msgid "AND"
+msgstr "UND"
+
+#: edd-vc-integration.php:548
+msgid "Number of downloads"
+msgstr "Anzahl der Downloads"
+
+#: edd-vc-integration.php:549
+msgid "Specify the maximum number of downloads you want to output."
+msgstr ""
+"Spezifiziere die maximale Anzahl and Downloads die angezeigt werden soll."
+
+#: edd-vc-integration.php:566
+msgid "Show price"
+msgstr "Zeige Preis"
+
+#: edd-vc-integration.php:567
+msgid "Display the price of the downloads."
+msgstr "Zeige den Preis der Downloads."
+
+#: edd-vc-integration.php:586
+msgid "Full content"
+msgstr "Kompletter Inhalt"
+
+#: edd-vc-integration.php:587
+msgid "Display the full content of the download or just the excerpt."
+msgstr "Zeige den kompletten Inhalt des Downloads, oder nur den Auszug."
+
+#: edd-vc-integration.php:606
+msgid "Excerpt"
+msgstr "Auszug"
+
+#: edd-vc-integration.php:607
+msgid "Display just the excerpt."
+msgstr "Zeige nur den Auszug."
+
+#: edd-vc-integration.php:626
+msgid "Buy button"
+msgstr "Kaufbutton"
+
+#: edd-vc-integration.php:627
+msgid "Display the buy button for each download."
+msgstr "Zeige den Kaufbutton für jeden Download."
+
+#: edd-vc-integration.php:628
 msgid "No"
 msgstr "Nein"
+
+#: edd-vc-integration.php:646
+msgid "Columns"
+msgstr "Spalten"
+
+#: edd-vc-integration.php:647
+msgid "Display the downloads in that many columns."
+msgstr "Zeige die Downloads in der Menge an Spalten."
+
+#: edd-vc-integration.php:665
+msgid "Show Thumbnails"
+msgstr "Zeige Thumbnails"
+
+#: edd-vc-integration.php:666
+msgid "Display thumbnails of the downloads."
+msgstr "Zeige Thumbnails der Downloads."
+
+#: edd-vc-integration.php:685
+msgid "Order by download attribute"
+msgstr "Sortiere nach Downloadattributen"
+
+#: edd-vc-integration.php:686
+msgid "Order the downloads by the selected attribute."
+msgstr "Sortiere die Downloads nach dem gewählten Attribute."
+
+#: edd-vc-integration.php:704
+msgid "Order direction"
+msgstr "Sortier Richtung"
+
+#: edd-vc-integration.php:705
+msgid "Order the downloads by the selected attribute in that direction."
+msgstr ""
+"Sortiere die Downloads nach dem gewählten Attribute in der Reihenfolge."
+
+#: edd-vc-integration.php:706
+msgid "ascending"
+msgstr "aufsteigend"
+
+#: edd-vc-integration.php:706
+msgid "descending"
+msgstr "absteigend"
+
+#: edd-vc-integration.php:723
+msgid "Specific Downloads"
+msgstr "Spezifische Downloads"
+
+#: edd-vc-integration.php:724
+msgid "You can specify multiple downloads."
+msgstr "Mehrere Downloads können spezifiziert werden."
+
+#: edd-vc-integration.php:754
+msgid "Download"
+msgstr "Download"
+
+#: edd-vc-integration.php:755
+msgid "Select a download."
+msgstr "Wähle ein Download aus."
+
+#: edd-vc-integration.php:778
+msgid "Download by SKU"
+msgstr "Download nach SKU"
+
+#: edd-vc-integration.php:779
+msgid "SKU of the download - use this instead of selecting a download."
+msgstr ""
+"SKU des Downloads - kann genutzt werden anstelle der Wahl des Downloads."
+
+#: edd-vc-integration.php:796
+msgid "Text on Button"
+msgstr "Text auf Button."
+
+#: edd-vc-integration.php:797
+msgid "Specify the text that is diplayed on the button."
+msgstr "Definiere den Text, der auf dem Downloadbutton angezeigt wird."
+
+#: edd-vc-integration.php:814
+msgid "Style"
+msgstr "Stiel"
+
+#: edd-vc-integration.php:815
+msgid "Select the style of the purchase link."
+msgstr "Wähle den Stiel des Kaufbuttons."
+
+#: edd-vc-integration.php:834
+msgid "Color"
+msgstr "Farbe"
+
+#: edd-vc-integration.php:835
+msgid "Select the color of the button."
+msgstr "Wähle die Farbe des Buttons."
+
+#: edd-vc-integration.php:839
+msgid "Inherit"
+msgstr "Übernehmen"
+
+#: edd-vc-integration.php:840
+msgid "Gray"
+msgstr "Grau"
+
+#: edd-vc-integration.php:841
+msgid "Blue"
+msgstr "Blau"
+
+#: edd-vc-integration.php:842
+msgid "Green"
+msgstr "Grün"
+
+#: edd-vc-integration.php:843
+msgid "Dark gray"
+msgstr "Dunkel grau"
+
+#: edd-vc-integration.php:844
+msgid "Yellow"
+msgstr "Gelb"
+
+#: edd-vc-integration.php:865
+msgid "Class"
+msgstr "Klasse"
+
+#: edd-vc-integration.php:866
+msgid "Add an html classes to the link."
+msgstr "Füge eine HTML Klasse dem Link hinzu."
+
+#: edd-vc-integration.php:883
+msgid "Variable Price Id"
+msgstr "Varibaler Preis Id"
+
+#: edd-vc-integration.php:884
+msgid "The variable price id to use - first one is default."
+msgstr ""
+"Die Variabler Preis Id die zu nutzen ist - die erste ist voreingestellt."
+
+#: edd-vc-integration.php:901
+msgid "Direct checkout"
+msgstr "Direkt zur Kasse"
+
+#: edd-vc-integration.php:902
+msgid "Send the user directly to the checkout."
+msgstr "Sende den Nutzer direkt zur Kasse."
 
 #: includes/class.extension-activation.php:47
 msgid "This plugin"

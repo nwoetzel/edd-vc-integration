@@ -23,6 +23,12 @@ if( !class_exists( 'EDD_VC_Integration' ) ) {
 class EDD_VC_Integration {
 
     /**
+     * @since 1.1.1
+     * @var   string Text domain used for translations
+     */
+    CONST TEXT_DOMAIN = 'edd-vc-integration';
+
+    /**
      * @var EDD_VC_Integration $instance The one true EDD_VC_Integration
      * @since       1.0.0
      */
@@ -117,20 +123,20 @@ class EDD_VC_Integration {
         $lang_dir = EDD_VC_INTEGRATION_DIR . '/languages/';
         $lang_dir = apply_filters( 'edd_vc_integration_languages_directory', $lang_dir );
         // Traditional WordPress plugin locale filter
-        $locale = apply_filters( 'plugin_locale', get_locale(), 'edd-vc-integration' );
-        $mofile = sprintf( '%1$s-%2$s.mo', 'edd-vc-integration', $locale );
+        $locale = apply_filters( 'plugin_locale', get_locale(), self::TEXT_DOMAIN );
+        $mofile = sprintf( '%1$s-%2$s.mo', self::TEXT_DOMAIN, $locale );
         // Setup paths to current locale file
         $mofile_local   = $lang_dir . $mofile;
-        $mofile_global  = WP_LANG_DIR . '/edd-vc-integration/' . $mofile;
+        $mofile_global  = WP_LANG_DIR . '/' . self::TEXT_DOMAIN . '/' . $mofile;
         if( file_exists( $mofile_global ) ) {
             // Look in global /wp-content/languages/edd-vc-integration/ folder
-            load_textdomain( 'edd-vc-integration', $mofile_global );
+            load_textdomain( self::TEXT_DOMAIN, $mofile_global );
         } elseif( file_exists( $mofile_local ) ) {
             // Look in local /wp-content/plugins/edd-vc-integration/languages/ folder
-            load_textdomain( 'edd-vc-integration', $mofile_local );
+            load_textdomain( self::TEXT_DOMAIN, $mofile_local );
         } else {
             // Load the default language files
-            load_plugin_textdomain( 'edd-vc-integration', false, 'edd-vc-integration/languages' );
+            load_plugin_textdomain( self::TEXT_DOMAIN, false, 'edd-vc-integration/languages' );
         }
     }
 
@@ -146,8 +152,8 @@ class EDD_VC_Integration {
         $new_settings = array(
             array(
                 'id'    => 'edd_vc_integration_settings',
-                'name'  => '<strong>' . __( 'VC Integration Settings', 'edd-vc-integration' ) . '</strong>',
-                'desc'  => __( 'Configure VC Integration', 'edd-vc-integration' ),
+                'name'  => '<strong>' . __( 'VC Integration Settings', self::TEXT_DOMAIN ) . '</strong>',
+                'desc'  => __( 'Configure VC Integration', self::TEXT_DOMAIN ),
                 'type'  => 'header',
             )
         );
@@ -166,9 +172,9 @@ class EDD_VC_Integration {
         // https://wpbakery.atlassian.net/wiki/pages/viewpage.action?pageId=524332
         // http://docs.easydigitaldownloads.com/article/224-downloads
         vc_map( array(
-            'name' => __( 'Downloads', 'edd-vc-integration' ),
+            'name' => __( 'Downloads', self::TEXT_DOMAIN ),
             'base' => 'downloads',
-            'description' => __( 'Output a list or grid of downloadable products.', 'edd-vc-integration' ),
+            'description' => __( 'Output a list or grid of downloadable products.', self::TEXT_DOMAIN ),
             'icon' => 'dashicons dashicons-download',
             'category' => 'EDD',
             'params' => array(
@@ -194,10 +200,10 @@ class EDD_VC_Integration {
         $purchase_collection_params = array();
         $purchase_collection_params[] = array(
             'param_name' => 'taxonomy',
-            'heading' => __( 'Taxonomy', 'edd-vc-integration' ),
+            'heading' => __( 'Taxonomy', self::TEXT_DOMAIN ),
             'description' => 'Category or Tag.',
             'type' => 'dropdown',
-            'value' => array( __( 'Category', 'edd-vc-integration' ) => 'download_category', __( 'Tag', 'edd-vc-integration' ) => 'download_tag',),
+            'value' => array( __( 'Category', self::TEXT_DOMAIN ) => 'download_category', __( 'Tag', self::TEXT_DOMAIN ) => 'download_tag',),
             'save_always' => true,
             'admin_label' => true,
             'group' => 'Data',
@@ -219,42 +225,42 @@ class EDD_VC_Integration {
         $purchase_collection_params[] = self::colorParam();
 
         vc_map( array(
-            'name' => __( 'Purchase Collection', 'edd-vc-integration' ),
+            'name' => __( 'Purchase Collection', self::TEXT_DOMAIN ),
             'base' => 'purchase_collection',
-            'description' => __( 'Make a unique category-based collection of products to be sold as a package.', 'edd-vc-integration' ),
+            'description' => __( 'Make a unique category-based collection of products to be sold as a package.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
             'params' => $purchase_collection_params,
         ) );
 
         // http://docs.easydigitaldownloads.com/article/223-downloaddiscounts
         vc_map( array(
-            'name' => __( 'Discounts', 'edd-vc-integration' ),
+            'name' => __( 'Discounts', self::TEXT_DOMAIN ),
             'base' => 'download_discounts',
-            'description' => __( 'Display a list of all active discounts in an unordered list of discount code and amount.', 'edd-vc-integration' ),
+            'description' => __( 'Display a list of all active discounts in an unordered list of discount code and amount.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
         ) );
 
         // http://docs.easydigitaldownloads.com/article/220-downloadhistory
         vc_map( array(
-            'name' => __( 'History', 'edd-vc-integration' ),
+            'name' => __( 'History', self::TEXT_DOMAIN ),
             'base' => 'download_history',
-            'description' => __( 'The user’s download history with product names and all associated download links.', 'edd-vc-integration' ),
+            'description' => __( 'The user’s download history with product names and all associated download links.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
         ) );
 
         // http://docs.easydigitaldownloads.com/article/228-purchasehistory
         vc_map( array(
-            'name' => __( 'Purchase History', 'edd-vc-integration' ),
+            'name' => __( 'Purchase History', self::TEXT_DOMAIN ),
             'base' => 'purchase_history',
-            'description' => __( 'The user’s purchase history with date, amount of each purchase, email and download links.', 'edd-vc-integration' ),
+            'description' => __( 'The user’s purchase history with date, amount of each purchase, email and download links.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
         ) );
 
         // http://docs.easydigitaldownloads.com/article/227-downloadcheckout
         vc_map( array(
-            'name' => __( 'Checkout', 'edd-vc-integration' ),
+            'name' => __( 'Checkout', self::TEXT_DOMAIN ),
             'base' => 'download_checkout',
-            'description' => __( 'Display the checkout form.', 'edd-vc-integration' ),
+            'description' => __( 'Display the checkout form.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
         ) );
 
@@ -273,34 +279,34 @@ class EDD_VC_Integration {
         $purchase_links_params[] = self::directParam();
 
         vc_map( array(
-            'name' => __( 'Purchase Link', 'edd-vc-integration' ),
+            'name' => __( 'Purchase Link', self::TEXT_DOMAIN ),
             'base' => 'purchase_link',
-            'description' => __( 'Display a purchase button for any download.', 'edd-vc-integration' ),
+            'description' => __( 'Display a purchase button for any download.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
             'params' => $purchase_links_params,
         ) );
 
         // http://docs.easydigitaldownloads.com/article/226-downloadcart-shortcode
         vc_map( array(
-            'name' => __( 'Cart', 'edd-vc-integration' ),
+            'name' => __( 'Cart', self::TEXT_DOMAIN ),
             'base' => 'download_cart',
-            'description' => __( 'Display the cart.', 'edd-vc-integration' ),
+            'description' => __( 'Display the cart.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
         ) );
 
         // http://docs.easydigitaldownloads.com/article/233-eddprofileeditor
         vc_map( array(
-            'name' => __( 'Profile Editor', 'edd-vc-integration' ),
+            'name' => __( 'Profile Editor', self::TEXT_DOMAIN ),
             'base' => 'edd_profile_editor',
-            'description' => __( 'Profile editor for logged-in customer.', 'edd-vc-integration' ),
+            'description' => __( 'Profile editor for logged-in customer.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
         ) );
 
         // http://docs.easydigitaldownloads.com/article/222-eddlogin
         vc_map( array(
-            'name' => __( 'Login', 'edd-vc-integration' ),
+            'name' => __( 'Login', self::TEXT_DOMAIN ),
             'base' => 'edd_login',
-            'description' => __( 'Login Form.', 'edd-vc-integration' ),
+            'description' => __( 'Login Form.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
             'params' => array(
                 self::redirectParam(),
@@ -309,9 +315,9 @@ class EDD_VC_Integration {
 
         // http://docs.easydigitaldownloads.com/article/889-register-form
         vc_map( array(
-            'name' => __( 'Register', 'edd-vc-integration' ),
+            'name' => __( 'Register', self::TEXT_DOMAIN ),
             'base' => 'edd_register',
-            'description' => __( 'Account Registration Form.', 'edd-vc-integration' ),
+            'description' => __( 'Account Registration Form.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
             'params' => array(
                 self::redirectParam(),
@@ -320,9 +326,9 @@ class EDD_VC_Integration {
 
         // http://docs.easydigitaldownloads.com/article/1193-eddprice-shortcode
         vc_map( array(
-            'name' => __( 'Price', 'edd-vc-integration' ),
+            'name' => __( 'Price', self::TEXT_DOMAIN ),
             'base' => 'edd_price',
-            'description' => __( 'Show price of a download.', 'edd-vc-integration' ),
+            'description' => __( 'Show price of a download.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
             'params' => array(
                 self::idParam(),
@@ -332,15 +338,15 @@ class EDD_VC_Integration {
 
         // http://docs.easydigitaldownloads.com/article/221-eddreceipt
         vc_map( array(
-            'name' => __( 'Receipt', 'edd-vc-integration' ),
+            'name' => __( 'Receipt', self::TEXT_DOMAIN ),
             'base' => 'edd_receipt',
-            'description' => __( 'Detailed breakdown of the purchased items.', 'edd-vc-integration' ),
+            'description' => __( 'Detailed breakdown of the purchased items.', self::TEXT_DOMAIN ),
             'category' => 'EDD',
             'params' => array(
                 array(
                     'param_name' => 'error',
-                    'heading' => __( 'Error message', 'edd-vc-integration' ),
-                    'description' => __( 'Change the default error message, if an error occurs.', 'edd-vc-integration' ),
+                    'heading' => __( 'Error message', self::TEXT_DOMAIN ),
+                    'description' => __( 'Change the default error message, if an error occurs.', self::TEXT_DOMAIN ),
                     'type' => 'textfield',
                     'admin_label' => true,
                     'group' => 'Layout',
@@ -348,60 +354,60 @@ class EDD_VC_Integration {
                 self::PriceParam(),
                 array(
                     'param_name' => 'discount',
-                    'heading' => __( 'Discount', 'edd-vc-integration' ),
-                    'description' => __( 'Display the discount codes used.', 'edd-vc-integration' ),
+                    'heading' => __( 'Discount', self::TEXT_DOMAIN ),
+                    'description' => __( 'Display the discount codes used.', self::TEXT_DOMAIN ),
                     'type' => 'checkbox',
-                    'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+                    'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
                     'save_always' => true,
                     'admin_label' => true,
                     'group' => 'Layout',
                 ),
                 array(
                     'param_name' => 'products',
-                    'heading' => __( 'Products', 'edd-vc-integration' ),
-                    'description' => __( 'Display the products purchased.', 'edd-vc-integration' ),
+                    'heading' => __( 'Products', self::TEXT_DOMAIN ),
+                    'description' => __( 'Display the products purchased.', self::TEXT_DOMAIN ),
                     'type' => 'checkbox',
-                    'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+                    'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
                     'save_always' => true,
                     'admin_label' => true,
                     'group' => 'Layout',
                 ),
                 array(
                     'param_name' => 'date',
-                    'heading' => __( 'Date', 'edd-vc-integration' ),
-                    'description' => __( 'Display the date of the purchase.', 'edd-vc-integration' ),
+                    'heading' => __( 'Date', self::TEXT_DOMAIN ),
+                    'description' => __( 'Display the date of the purchase.', self::TEXT_DOMAIN ),
                     'type' => 'checkbox',
-                    'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+                    'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
                     'save_always' => true,
                     'admin_label' => true,
                     'group' => 'Layout',
                 ),
                 array(
                     'param_name' => 'payment_key',
-                    'heading' => __( 'Purchase Identifier', 'edd-vc-integration' ),
-                    'description' => __( 'Display the unique identifier for the order.', 'edd-vc-integration' ),
+                    'heading' => __( 'Purchase Identifier', self::TEXT_DOMAIN ),
+                    'description' => __( 'Display the unique identifier for the order.', self::TEXT_DOMAIN ),
                     'type' => 'checkbox',
-                    'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+                    'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
                     'save_always' => true,
                     'admin_label' => true,
                     'group' => 'Layout',
                 ),
                 array(
                     'param_name' => 'payment_method',
-                    'heading' => __( 'Payment method', 'edd-vc-integration' ),
-                    'description' => __( 'Display the method of payment for the order.', 'edd-vc-integration' ),
+                    'heading' => __( 'Payment method', self::TEXT_DOMAIN ),
+                    'description' => __( 'Display the method of payment for the order.', self::TEXT_DOMAIN ),
                     'type' => 'checkbox',
-                    'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+                    'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
                     'save_always' => true,
                     'admin_label' => true,
                     'group' => 'Layout',
                 ),
                 array(
                     'param_name' => 'payment_id',
-                    'heading' => __( 'Payment Number', 'edd-vc-integration' ),
-                    'description' => __( 'Display the payment number of the order.', 'edd-vc-integration' ),
+                    'heading' => __( 'Payment Number', self::TEXT_DOMAIN ),
+                    'description' => __( 'Display the payment number of the order.', self::TEXT_DOMAIN ),
                     'type' => 'checkbox',
-                    'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+                    'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
                     'save_always' => true,
                     'admin_label' => true,
                     'group' => 'Layout',
@@ -420,8 +426,8 @@ class EDD_VC_Integration {
     protected static function redirectParam() {
         return array(
             'param_name' => 'redirect',
-            'heading' => __( 'Redirect', 'edd-vc-integration' ),
-            'description' => __( 'Redirect user after successful login.', 'edd-vc-integration' ),
+            'heading' => __( 'Redirect', self::TEXT_DOMAIN ),
+            'description' => __( 'Redirect user after successful login.', self::TEXT_DOMAIN ),
             'type' => 'textfield',
             'admin_label' => true,
             'group' => 'Function',
@@ -438,8 +444,8 @@ class EDD_VC_Integration {
     protected static function categoryParam() {
         return array(
             'param_name' => 'category',
-            'heading' => __( 'Categories', 'edd-vc-integration' ),
-            'description' => __('Show downloads of particular download categories.', 'edd-vc-integration' ),
+            'heading' => __( 'Categories', self::TEXT_DOMAIN ),
+            'description' => __('Show downloads of particular download categories.', self::TEXT_DOMAIN ),
             'type' => 'autocomplete',
             'settings' => array(
                 'multiple' => 'true',
@@ -465,8 +471,8 @@ class EDD_VC_Integration {
     protected static function tagParam() {
         return array(
             'param_name' => 'tag',
-            'heading' => __( 'Tags', 'edd-vc-integration' ),
-            'description' => __( 'Show downloads of particular download tags.', 'edd-vc-integration' ),
+            'heading' => __( 'Tags', self::TEXT_DOMAIN ),
+            'description' => __( 'Show downloads of particular download tags.', self::TEXT_DOMAIN ),
             'type' => 'autocomplete',
             'settings' => array(
                 'multiple' => 'true',
@@ -493,8 +499,8 @@ class EDD_VC_Integration {
         // simply modify the categoryParam
         $param = self::categoryParam();
         $param['param_name'] = 'exclude_category';
-        $param['heading'] = __( 'Exclude Categories', 'edd-vc-integration' );
-        $param['description'] = __( 'Exclude downloads of particular download categories.', 'edd-vc-integration' );
+        $param['heading'] = __( 'Exclude Categories', self::TEXT_DOMAIN );
+        $param['description'] = __( 'Exclude downloads of particular download categories.', self::TEXT_DOMAIN );
 
         return $param;
     }
@@ -510,8 +516,8 @@ class EDD_VC_Integration {
         // simply modify the tagParam
         $param = self::tagParam();
         $param['param_name'] = 'exclude_tag';
-        $param['heading'] = __( 'Exclude Tags', 'edd-vc-integration' );
-        $param['description'] = __( 'Exclude downloads of particular download tags.', 'edd-vc-integration' );
+        $param['heading'] = __( 'Exclude Tags', self::TEXT_DOMAIN );
+        $param['description'] = __( 'Exclude downloads of particular download tags.', self::TEXT_DOMAIN );
 
         return $param;
     }
@@ -526,9 +532,9 @@ class EDD_VC_Integration {
     protected static function relationParam() {
         return array(
             'param_name' => 'relation',
-            'heading' => __( 'Category and Tag relation', 'edd-vc-integration' ),
-            'description' => __( 'Specify whether the downloads displayed have to be in ALL the categories/tags provided ("AND"), or just in at least one ("OR").', 'edd-vc-integration' ),
-            'value' => array( __('OR', 'edd-vc-integration' ) => 'OR', __( 'AND', 'edd-vc-integration' ) => 'AND',),
+            'heading' => __( 'Category and Tag relation', self::TEXT_DOMAIN ),
+            'description' => __( 'Specify whether the downloads displayed have to be in ALL the categories/tags provided ("AND"), or just in at least one ("OR").', self::TEXT_DOMAIN ),
+            'value' => array( __('OR', self::TEXT_DOMAIN ) => 'OR', __( 'AND', self::TEXT_DOMAIN ) => 'AND',),
             'type' => 'dropdown',
             'admin_label' => true,
             'group' => 'Data',
@@ -545,8 +551,8 @@ class EDD_VC_Integration {
     protected static function numberParam() {
         return array(
             'param_name' => 'number',
-            'heading' => __( 'Number of downloads', 'edd-vc-integration' ),
-            'description' => __( 'Specify the maximum number of downloads you want to output.', 'edd-vc-integration' ),
+            'heading' => __( 'Number of downloads', self::TEXT_DOMAIN ),
+            'description' => __( 'Specify the maximum number of downloads you want to output.', self::TEXT_DOMAIN ),
             'type' => 'textfield',
             'admin_label' => true,
             'group' => 'Layout',
@@ -563,10 +569,10 @@ class EDD_VC_Integration {
     protected static function priceParam() {
         return array(
             'param_name' => 'price',
-            'heading' => __( 'Show price', 'edd-vc-integration' ),
-            'description' => __( 'Display the price of the downloads.', 'edd-vc-integration' ),
+            'heading' => __( 'Show price', self::TEXT_DOMAIN ),
+            'description' => __( 'Display the price of the downloads.', self::TEXT_DOMAIN ),
             'type' => 'checkbox',
-            'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+            'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
             'save_always' => true,
             'admin_label' => true,
             'group' => 'Layout',
@@ -583,10 +589,10 @@ class EDD_VC_Integration {
     protected static function fullContentParam() {
         return array(
             'param_name' => 'full_content',
-            'heading' => __( 'Full content', 'edd-vc-integration' ),
-            'description' => __( 'Display the full content of the download or just the excerpt.', 'edd-vc-integration' ),
+            'heading' => __( 'Full content', self::TEXT_DOMAIN ),
+            'description' => __( 'Display the full content of the download or just the excerpt.', self::TEXT_DOMAIN ),
             'type' => 'checkbox',
-            'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+            'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
             'save_always' => true,
             'admin_label' => true,
             'group' => 'Layout',
@@ -603,10 +609,10 @@ class EDD_VC_Integration {
     protected static function excerptParam() {
         return array(
             'param_name' => 'excerpt',
-            'heading' => __( 'Excerpt', 'edd-vc-integration' ),
-            'description' => __( 'Display just the excerpt.', 'edd-vc-integration' ),
+            'heading' => __( 'Excerpt', self::TEXT_DOMAIN ),
+            'description' => __( 'Display just the excerpt.', self::TEXT_DOMAIN ),
             'type' => 'checkbox',
-            'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+            'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
             'save_always' => true,
             'admin_label' => true,
             'group' => 'Layout',
@@ -623,9 +629,9 @@ class EDD_VC_Integration {
     protected static function buyButtonParam() {
         return array(
             'param_name' => 'buy_button',
-            'heading' => __( 'Buy button', 'edd-vc-integration' ),
-            'description' => __( 'Display the buy button for each download.', 'edd-vc-integration' ),
-            'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes', __( 'No', 'edd-vc-integration' ) => 'no' ),
+            'heading' => __( 'Buy button', self::TEXT_DOMAIN ),
+            'description' => __( 'Display the buy button for each download.', self::TEXT_DOMAIN ),
+            'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes', __( 'No', self::TEXT_DOMAIN ) => 'no' ),
             'save_always' => true,
             'type' => 'dropdown',
             'admin_label' => true,
@@ -643,8 +649,8 @@ class EDD_VC_Integration {
     protected static function columnsParam() {
         return array(
             'param_name' => 'columns',
-            'heading' => __( 'Columns', 'edd-vc-integration' ),
-            'description' => __( 'Display the downloads in that many columns.', 'edd-vc-integration' ),
+            'heading' => __( 'Columns', self::TEXT_DOMAIN ),
+            'description' => __( 'Display the downloads in that many columns.', self::TEXT_DOMAIN ),
             'value' => array('1' => '1', '2' => '2', '3' => '3', '4' => '4',),
             'type' => 'dropdown',
             'admin_label' => true,
@@ -662,10 +668,10 @@ class EDD_VC_Integration {
     protected static function thumbnailsParam() {
         return array(
             'param_name' => 'thumbnails',
-            'heading' => __( 'Show Thumbnails', 'edd-vc-integration' ),
-            'description' => __( 'Display thumbnails of the downloads.', 'edd-vc-integration' ),
+            'heading' => __( 'Show Thumbnails', self::TEXT_DOMAIN ),
+            'description' => __( 'Display thumbnails of the downloads.', self::TEXT_DOMAIN ),
             'type' => 'checkbox',
-            'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'true' ),
+            'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'true' ),
             'save_always' => true,
             'admin_label' => true,
             'group' => 'Layout',
@@ -682,8 +688,8 @@ class EDD_VC_Integration {
     protected static function orderbyParam() {
         return array(
             'param_name' => 'orderby',
-            'heading' => __( 'Order by download attribute', 'edd-vc-integration' ),
-            'description' => __( 'Order the downloads by the selected attribute.', 'edd-vc-integration' ),
+            'heading' => __( 'Order by download attribute', self::TEXT_DOMAIN ),
+            'description' => __( 'Order the downloads by the selected attribute.', self::TEXT_DOMAIN ),
             'value' => array( 'id', 'price', 'post_date', 'random', 'title'),
             'type' => 'dropdown',
             'admin_label' => true,
@@ -701,9 +707,9 @@ class EDD_VC_Integration {
     protected static function orderParam() {
         return array(
             'param_name' => 'order',
-            'heading' => __( 'Order direction', 'edd-vc-integration' ),
-            'description' => __( 'Order the downloads by the selected attribute in that direction.', 'edd-vc-integration' ),
-            'value' => array( __( 'ascending', 'edd-vc-integration' ) => 'ASC', __( 'descending', 'edd-vc-integration' ) => 'DESC'),
+            'heading' => __( 'Order direction', self::TEXT_DOMAIN ),
+            'description' => __( 'Order the downloads by the selected attribute in that direction.', self::TEXT_DOMAIN ),
+            'value' => array( __( 'ascending', self::TEXT_DOMAIN ) => 'ASC', __( 'descending', self::TEXT_DOMAIN ) => 'DESC'),
             'type' => 'dropdown',
             'admin_label' => true,
             'group' => 'Layout',
@@ -720,8 +726,8 @@ class EDD_VC_Integration {
     protected static function idsParam() {
         return array(
             'param_name' => 'ids',
-            'heading' => __( 'Specific Downloads', 'edd-vc-integration' ),
-            'description' => __( 'You can specify multiple downloads.', 'edd-vc-integration' ),
+            'heading' => __( 'Specific Downloads', self::TEXT_DOMAIN ),
+            'description' => __( 'You can specify multiple downloads.', self::TEXT_DOMAIN ),
             'type' => 'autocomplete',
             'settings' => array(
                 'multiple' => true,
@@ -751,8 +757,8 @@ class EDD_VC_Integration {
     protected static function idParam() {
         return array(
             'param_name' => 'id',
-            'heading' => __( 'Download', 'edd-vc-integration' ),
-            'description' => __( 'Select a download.', 'edd-vc-integration' ),
+            'heading' => __( 'Download', self::TEXT_DOMAIN ),
+            'description' => __( 'Select a download.', self::TEXT_DOMAIN ),
             'type' => 'autocomplete',
             'settings' => array(
                 'sortable' => true,
@@ -775,8 +781,8 @@ class EDD_VC_Integration {
     protected static function skuParam() {
         return array(
             'param_name' => 'sku',
-            'heading' => __( 'Download by SKU', 'edd-vc-integration' ),
-            'description' => __( 'SKU of the download - use this instead of selecting a download.', 'edd-vc-integration' ),
+            'heading' => __( 'Download by SKU', self::TEXT_DOMAIN ),
+            'description' => __( 'SKU of the download - use this instead of selecting a download.', self::TEXT_DOMAIN ),
             'type' => 'textfield',
             'admin_label' => true,
             'group' => 'Data',
@@ -793,8 +799,8 @@ class EDD_VC_Integration {
     protected static function textParam() {
         return array(
             'param_name' => 'text',
-            'heading' => __( 'Text on Button', 'edd-vc-integration' ),
-            'description' => __( 'Specify the text that is diplayed on the button.', 'edd-vc-integration' ),
+            'heading' => __( 'Text on Button', self::TEXT_DOMAIN ),
+            'description' => __( 'Specify the text that is diplayed on the button.', self::TEXT_DOMAIN ),
             'type' => 'textfield',
             'admin_label' => true,
             'group' => 'Layout',
@@ -811,8 +817,8 @@ class EDD_VC_Integration {
     protected static function styleParam() {
         return array(
             'param_name' => 'style',
-            'heading' => __( 'Style', 'edd-vc-integration' ),
-            'description' => __( 'Select the style of the purchase link.', 'edd-vc-integration' ),
+            'heading' => __( 'Style', self::TEXT_DOMAIN ),
+            'description' => __( 'Select the style of the purchase link.', self::TEXT_DOMAIN ),
             'type' => 'dropdown',
             'value' => array( 'Default' => edd_get_option( 'button_style', 'button' ), 'Button' => 'button', 'Text' => 'text',),
             'admin_label' => true,
@@ -831,17 +837,17 @@ class EDD_VC_Integration {
     protected static function colorParam() {
         return array(
             'param_name' => 'color',
-            'heading' => __( 'Color', 'edd-vc-integration' ),
-            'description' => __( 'Select the color of the button.', 'edd-vc-integration' ),
+            'heading' => __( 'Color', self::TEXT_DOMAIN ),
+            'description' => __( 'Select the color of the button.', self::TEXT_DOMAIN ),
             'type' => 'dropdown',
             'value' => array(
                 'default' => edd_get_option( 'checkout_color', 'blue' ),
-                __( 'Inherit', 'edd-vc-integration' ) => 'inherit',
-                __( 'Gray', 'edd-vc-integration' ) => 'gray',
-                __( 'Blue', 'edd-vc-integration' ) => 'blue',
-                __( 'Green', 'edd-vc-integration' ) => 'green',
-                __( 'Dark gray', 'edd-vc-integration' ) => 'dark gray',
-                __( 'Yellow', 'edd-vc-integration' ) => 'yellow',
+                __( 'Inherit', self::TEXT_DOMAIN ) => 'inherit',
+                __( 'Gray', self::TEXT_DOMAIN ) => 'gray',
+                __( 'Blue', self::TEXT_DOMAIN ) => 'blue',
+                __( 'Green', self::TEXT_DOMAIN ) => 'green',
+                __( 'Dark gray', self::TEXT_DOMAIN ) => 'dark gray',
+                __( 'Yellow', self::TEXT_DOMAIN ) => 'yellow',
             ),
             'dependency' => array(
                 'element' => 'style',
@@ -862,8 +868,8 @@ class EDD_VC_Integration {
     protected static function classParam() {
         return array(
             'param_name' => 'class',
-            'heading' => __( 'Class', 'edd-vc-integration' ),
-            'description' => __( 'Add an html classes to the link.', 'edd-vc-integration' ),
+            'heading' => __( 'Class', self::TEXT_DOMAIN ),
+            'description' => __( 'Add an html classes to the link.', self::TEXT_DOMAIN ),
             'type' => 'textfield',
             'admin_label' => true,
             'group' => 'Layout',
@@ -880,8 +886,8 @@ class EDD_VC_Integration {
     protected static function priceIdParam() {
         return array(
             'param_name' => 'price_id',
-            'heading' => __( 'Variable Price Id', 'edd-vc-integration' ),
-            'description' => __( 'The variable price id to use - first one is default.', 'edd-vc-integration' ),
+            'heading' => __( 'Variable Price Id', self::TEXT_DOMAIN ),
+            'description' => __( 'The variable price id to use - first one is default.', self::TEXT_DOMAIN ),
             'type' => 'textfield',
             'admin_label' => true,
             'group' => 'Data',
@@ -898,10 +904,10 @@ class EDD_VC_Integration {
     protected static function directParam() {
         return array(
             'param_name' => 'direct',
-            'heading' => __( 'Direct checkout', 'edd-vc-integration' ),
-            'description' => __( 'Send the user directly to the checkout.', 'edd-vc-integration' ),
+            'heading' => __( 'Direct checkout', self::TEXT_DOMAIN ),
+            'description' => __( 'Send the user directly to the checkout.', self::TEXT_DOMAIN ),
             'type' => 'checkbox',
-            'value' => array( __( 'Yes', 'edd-vc-integration' ) => 'yes' ),
+            'value' => array( __( 'Yes', self::TEXT_DOMAIN ) => 'yes' ),
             'save_always' => true,
             'admin_label' => true,
             'group' => 'Function',

@@ -49,7 +49,7 @@ msgstr "Kategorie"
 
 #: edd-vc-integration.php:200
 msgid "Tag"
-msgstr "Tag"
+msgstr "Schlagwort"
 
 #: edd-vc-integration.php:222
 msgid "Purchase Collection"
@@ -247,7 +247,7 @@ msgstr "Schlagwörter"
 
 #: edd-vc-integration.php:469
 msgid "Show downloads of particular download tags."
-msgstr "Zeige Downloads von bestimmten Downloadtags an."
+msgstr "Zeige Downloads von bestimmten Download Schlagwörtern."
 
 #: edd-vc-integration.php:496
 msgid "Exclude Categories"
@@ -259,23 +259,23 @@ msgstr "Schließe Downloads bestimmer Downloadkategorien aus."
 
 #: edd-vc-integration.php:513
 msgid "Exclude Tags"
-msgstr "Tags ausschließen"
+msgstr "Schlagwörter ausschließen"
 
 #: edd-vc-integration.php:514
 msgid "Exclude downloads of particular download tags."
-msgstr "Schließe Downloads bestimmer Downloadtags aus."
+msgstr "Schließe Downloads bestimmer Download Schlagwörter aus."
 
 #: edd-vc-integration.php:529
 msgid "Category and Tag relation"
-msgstr "Kategorie und Tag Relation"
+msgstr "Kategorie und Schlagwort Relation"
 
 #: edd-vc-integration.php:530
 msgid ""
 "Specify whether the downloads displayed have to be in ALL the categories/"
 "tags provided (\"AND\"), or just in at least one (\"OR\")."
 msgstr ""
-"Spezifiziere ob die angezeigten Downloads in ALLEN Kategorien/Tags sein "
-"müssen (\"UND\"), oder in mindestens einer (\"ODER\")."
+"Spezifiziere ob die angezeigten Downloads in ALLEN Kategorien/Schlagwörtern "
+"sein müssen (\"UND\"), oder in mindestens einer (\"ODER\")."
 
 #: edd-vc-integration.php:531
 msgid "OR"

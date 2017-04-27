@@ -1,0 +1,31 @@
+{
+	"name"       : "nwoetzel/edd-vc-integration",
+	"description": "Wordpress Easy-Digital-Downloads plugin integrating shortcodes into visual composer.",
+	"keywords"   : ["wordpress", "easy-digital-downloads", "visual-composer", "js_composer"],
+	"type"       : "wordpress-plugin",
+	"homepage"   : "https://github.com/nwoetzel/edd-vc-integration",
+	"license"    : "GPLv2",
+	"authors"    : [
+		{
+			"name"    : "Nils Woetzel",
+			"email"   : "nils.woetzel@h-its.org",
+			"homepage": "https://www.h-its.org.net/"
+		}
+	],
+	"support"    : {
+		"issues": "https://github.com/nwoetzel/edd-vc-integration/issues",
+		"source": "https://github.com/nwoetzel/edd-vc-integration"
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url" : "https://wpackagist.org"
+		}
+	],
+	"require"    : {
+		"composer/installers": "~1.0"
+	},
+	"suggest" : {
+		"wpackagist-plugin/easy-digital-downloads": "The Easy Digital Download plugin"
+	}
+}

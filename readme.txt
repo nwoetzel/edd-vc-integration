@@ -3,7 +3,7 @@ Contributors: nwoetzel
 Tags: edd, easy digital downloads, vc, visual composer
 Requires at least: 4.6
 Tested up to: 4.7.2
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,7 +19,28 @@ The [easy digital downloads shortcodes](https://github.com/nwoetzel/edd-vc-integ
 
 == Installation ==
 
-Download the zip file for the most recent stable release and install from it.
+Download the latest release from github as zip and install it through wordpress.
+Or use [wp-cli](http://wp-cli.org/) with the latest release:
+<pre>
+wp-cli.phar plugin install https://github.com/nwoetzel/edd-vc-integration/archive/1.2.0.zip --activate
+</pre>
+
+Or add them as a composer package in your wordpress' composer.json file:
+<pre>
+{
+        "repositories": [
+                {
+                        "type":  "vcs",
+                        "url":   "https://github.com/nwoetzel/edd-vc-integration.git"
+                }
+
+        ],
+        "require"     : {
+                "nwoetzel/edd-vc-integration":"~1.2"
+        }
+}
+</pre>
+Read more about that at http://composer.rarst.net/
 
 == Frequently Asked Questions ==
 
@@ -30,6 +51,9 @@ There might be some improvement in the future. No high priority.
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2.0 =
+* added support for composer http://composer.rarst.net/
 
 = 1.1.0 =
 * added load_textdomain
